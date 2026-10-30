@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KASHENKO // ARCHIVE OS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>KASHENKO // ARCHIVE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg: #080808;
-            --surface: #101010;
-            --surface-card: #161616;
-            --border: #262626;
+            --bg: #050505;
+            --surface: #0e0e0e;
+            --surface-card: #141414;
+            --border: #222222;
             --border-hover: #ffffff;
-            --text-main: #ededed;
-            --text-muted: #737373;
+            --text-main: #f0f0f0;
+            --text-muted: #707070;
             --accent: #ffffff;
             --danger: #ff3b30;
             --success: #34c759;
             --warning: #ffcc00;
-            --radius: 4px; /* Индустриальные четкие углы в стиле бренда */
+            --radius: 2px;
         }
 
         * {
@@ -36,167 +36,107 @@
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            padding: 40px 16px;
         }
 
-        /* Архивный сайдбар */
-        aside {
-            width: 280px;
-            background: var(--surface);
-            border-right: 1px solid var(--border);
+        /* Узкий центральный контейнер в стиле рефа */
+        .wrapper {
+            width: 100%;
+            max-width: 680px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 28px;
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            z-index: 100;
+            gap: 24px;
         }
 
-        .brand {
+        /* Шапка бренда */
+        header {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 24px 28px;
+            border-radius: var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-box {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 36px;
-            color: #fff;
-            text-transform: uppercase;
         }
 
-        .brand-icon {
+        .brand-logo {
             width: 32px;
             height: 32px;
             background: #fff;
             color: #000;
-            border-radius: var(--radius);
+            font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: var(--radius);
             font-size: 0.9rem;
-            font-weight: 800;
         }
 
-        .menu {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            flex: 1;
+        .brand-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        .menu-btn {
-            background: transparent;
-            border: none;
+        .clock-badge {
+            font-size: 0.8rem;
             color: var(--text-muted);
-            padding: 14px 16px;
+            letter-spacing: 1px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Навигация (узкие вкладки-кнопки) */
+        .nav-tabs {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
+
+        .tab-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 12px 6px;
             border-radius: var(--radius);
             cursor: pointer;
             font-weight: 500;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            text-align: center;
             transition: all 0.2s ease;
-            text-align: left;
         }
 
-        .menu-btn:hover {
-            color: var(--text-main);
-            background: rgba(255,255,255,0.03);
+        .tab-btn:hover {
+            color: #fff;
+            border-color: #444;
         }
 
-        .menu-btn.active {
+        .tab-btn.active {
             background: #fff;
             color: #000;
             font-weight: 700;
-        }
-
-        .system-status-card {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 14px;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #fff;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #fff;
-        }
-
-        /* Основной контент */
-        main {
-            margin-left: 280px;
-            flex: 1;
-            padding: 48px;
-            max-width: calc(100vw - 280px);
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 24px;
-        }
-
-        .header-title h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-            color: #fff;
-        }
-
-        .header-title p {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: 6px;
-            letter-spacing: 0.5px;
-        }
-
-        .badge-widget {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 10px 20px;
-            border-radius: var(--radius);
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--text-main);
-            letter-spacing: 1px;
+            border-color: #fff;
         }
 
         /* Секции */
         .section {
             display: none;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 24px;
-            animation: fadeIn 0.25s ease;
+            flex-direction: column;
+            gap: 20px;
+            animation: fadeIn 0.2s ease;
         }
 
         .section.active {
-            display: grid;
+            display: flex;
         }
 
         @keyframes fadeIn {
@@ -204,41 +144,51 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Карточки в стиле гранж-архива */
+        /* Карточки */
         .card {
             background: var(--surface-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 32px;
-            grid-column: span 6;
+            padding: 28px;
             transition: border-color 0.2s;
-            position: relative;
         }
 
-        .card:hover { border-color: var(--border-hover); }
-        .card.full { grid-column: span 12; }
+        .card:hover { border-color: #444; }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 14px;
+        }
 
         .card h3 {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 700;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #fff;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            color: #fff;
         }
 
+        .card-tag {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Поля ввода и кнопки */
         input, select, textarea {
             width: 100%;
-            background: #0a0a0a;
+            background: #090909;
             border: 1px solid var(--border);
             color: var(--text-main);
-            padding: 14px 18px;
+            padding: 12px 16px;
             border-radius: var(--radius);
-            margin-bottom: 14px;
-            font-size: 0.9rem;
+            margin-bottom: 12px;
+            font-size: 0.88rem;
             outline: none;
             transition: border-color 0.2s;
             letter-spacing: 0.5px;
@@ -252,17 +202,17 @@
             background: #fff;
             color: #000;
             border: none;
-            padding: 14px 22px;
+            padding: 12px 20px;
             border-radius: var(--radius);
             cursor: pointer;
             font-weight: 700;
             width: 100%;
-            transition: all 0.2s;
+            transition: background 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            font-size: 0.85rem;
+            gap: 8px;
+            font-size: 0.78rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
         }
@@ -272,26 +222,27 @@
         .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
 
         .timer-box {
-            background: #0a0a0a;
+            background: #090909;
             border: 1px solid var(--border);
-            padding: 24px;
+            padding: 20px;
             border-radius: var(--radius);
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .timer-display {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
             color: #fff;
-            margin-top: 6px;
+            margin-top: 4px;
             letter-spacing: 2px;
             font-variant-numeric: tabular-nums;
         }
 
+        /* Списки */
         ul.list {
             list-style: none;
-            max-height: 340px;
+            max-height: 320px;
             overflow-y: auto;
             padding-right: 4px;
         }
@@ -303,16 +254,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 18px;
-            background: #121212;
+            padding: 14px 16px;
+            background: #0d0d0d;
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-size: 0.88rem;
             transition: border-color 0.2s;
         }
 
-        li.item:hover { border-color: #404040; }
-        li.item.done span, li.item.done strong { text-decoration: line-through; color: var(--text-muted); opacity: 0.5; }
+        li.item:hover { border-color: #444; }
+        li.item.done span, li.item.done strong { text-decoration: line-through; color: var(--text-muted); opacity: 0.4; }
 
         .item-actions { display: flex; gap: 10px; align-items: center; }
 
@@ -321,92 +273,67 @@
             border: none;
             cursor: pointer;
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: color 0.2s;
         }
         .action-btn.del:hover { color: var(--danger); }
         .action-btn.chk:hover { color: var(--success); }
 
         .idea-box {
-            background: #121212;
+            background: #0d0d0d;
             border: 1px solid var(--border);
-            padding: 18px;
+            padding: 16px;
             border-radius: var(--radius);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             font-weight: 500;
             color: #fff;
             display: none;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             line-height: 1.5;
             letter-spacing: 0.5px;
         }
 
-        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
-        @media (max-width: 900px) {
-            body { flex-direction: column; }
-            aside {
-                width: 100%;
-                height: auto;
-                position: relative;
-                flex-direction: row;
-                align-items: center;
-                padding: 16px;
-                gap: 12px;
-                overflow-x: auto;
-            }
-            .brand { margin-bottom: 0; font-size: 0.95rem; letter-spacing: 1px; }
-            .brand-icon { width: 28px; height: 28px; font-size: 0.75rem; }
-            .menu { flex-direction: row; gap: 6px; overflow-x: auto; }
-            .menu-btn { padding: 8px 12px; font-size: 0.75rem; white-space: nowrap; }
-            .system-status-card { display: none; }
-            main { margin-left: 0; max-width: 100%; padding: 20px; }
-            header { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
-            .badge-widget { align-self: flex-start; }
-            .card { grid-column: span 12; padding: 20px; }
-            .timer-display { font-size: 1.8rem; }
+        /* Адаптивность для телефонов */
+        @media (max-width: 600px) {
+            body { padding: 12px 8px; }
+            .nav-tabs { grid-template-columns: repeat(5, 1fr); gap: 4px; }
+            .tab-btn { font-size: 0.65rem; padding: 10px 2px; letter-spacing: 0px; }
+            header { padding: 16px 20px; }
+            .card { padding: 20px; }
+            .timer-display { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Архивное меню -->
-    <aside>
-        <div class="brand">
-            <div class="brand-icon">K</div>
-            <span>Archive</span>
-        </div>
-        <div class="menu">
-            <button class="menu-btn active" onclick="switchTab('work', this)"><i class="fa-solid fa-briefcase"></i> 01. Работа</button>
-            <button class="menu-btn" onclick="switchTab('routine', this)"><i class="fa-solid fa-moon"></i> 02. Рутина</button>
-            <button class="menu-btn" onclick="switchTab('content', this)"><i class="fa-solid fa-video"></i> 03. Контент</button>
-            <button class="menu-btn" onclick="switchTab('music', this)"><i class="fa-solid fa-guitar"></i> 04. Музыка</button>
-            <button class="menu-btn" onclick="switchTab('analytics', this)"><i class="fa-solid fa-chart-line"></i> 05. Охваты</button>
-        </div>
-        <div class="system-status-card">
-            <div class="status-indicator">
-                <div class="status-dot"></div>
-                <span id="systemModeText">System Online</span>
-            </div>
-            <span style="font-size: 0.7rem; color: var(--text-muted);" id="systemSubText">Edition 2026 // Pro</span>
-        </div>
-    </aside>
-
-    <!-- Основной контент -->
-    <main>
+    <div class="wrapper">
+        <!-- Шапка -->
         <header>
-            <div class="header-title">
-                <h1 id="pageTitle">Работа (до 16:00-18:00)</h1>
-                <p id="pageSubtitle">Основной рабочий блок, таблицы и поиск блогеров</p>
+            <div class="brand-box">
+                <div class="brand-logo">K</div>
+                <div class="brand-title">Kashenko OS</div>
             </div>
-            <div class="badge-widget" id="liveClock">00:00:00</div>
+            <div class="clock-badge" id="liveClock">00:00:00</div>
         </header>
 
-        <!-- ПАПКА 1: РАБОТА -->
+        <!-- Навигация -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('work', this)">01. Работа</button>
+            <button class="tab-btn" onclick="switchTab('routine', this)">02. Рутина</button>
+            <button class="tab-btn" onclick="switchTab('content', this)">03. Контент</button>
+            <button class="tab-btn" onclick="switchTab('music', this)">04. Музыка</button>
+            <button class="tab-btn" onclick="switchTab('analytics', this)">05. Охваты</button>
+        </div>
+
+        <!-- РАЗДЕЛ 01: РАБОТА -->
         <div id="work" class="section active">
             <div class="card">
-                <h3><i class="fa-solid fa-briefcase"></i> Тайм-менеджмент дня</h3>
+                <div class="card-header">
+                    <h3>Тайм-менеджмент</h3>
+                    <span class="card-tag">До 18:00</span>
+                </div>
                 <div class="timer-box">
-                    <span style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">До конца рабочего дня:</span>
+                    <span style="font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase;">До конца смены:</span>
                     <div class="timer-display" id="workCountdown">00:00:00</div>
                 </div>
                 <input type="text" id="workTaskInput" placeholder="Задача (поиск блогеров, таблицы)...">
@@ -414,44 +341,54 @@
             </div>
 
             <div class="card">
-                <h3><i class="fa-solid fa-clipboard-check"></i> Итоги дня и перенос</h3>
-                <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 16px; letter-spacing: 0.5px;">Невыполненные задачи можно перенести на следующий день.</p>
-                <button class="btn btn-outline" onclick="carryOverTasks()" style="margin-bottom: 16px;"><i class="fa-solid fa-share"></i> Перенести несделанное</button>
+                <div class="card-header">
+                    <h3>Список и итоги</h3>
+                    <span class="card-tag">Перенос задач</span>
+                </div>
+                <button class="btn btn-outline" onclick="carryOverTasks()" style="margin-bottom: 16px;"><i class="fa-solid fa-share"></i> Перенести несделанное на завтра</button>
                 <ul id="workList" class="list"></ul>
             </div>
         </div>
 
-        <!-- ПАПКА 2: ЛИЧНАЯ РУТИНА -->
+        <!-- РАЗДЕЛ 02: РУТИНА -->
         <div id="routine" class="section">
-            <div class="card full">
-                <h3><i class="fa-solid fa-moon"></i> Вечерний лайфстайл (После 18:00)</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 16px; letter-spacing: 0.5px;">Отдых, прогулки, TikTok и общение с девушкой.</p>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    <span style="background: #121212; border: 1px solid var(--border); padding: 8px 14px; border-radius: var(--radius); font-size: 0.8rem; letter-spacing: 0.5px;"><i class="fa-solid fa-person-walking" style="color: #fff;"></i> Прогулка</span>
-                    <span style="background: #121212; border: 1px solid var(--border); padding: 8px 14px; border-radius: var(--radius); font-size: 0.8rem; letter-spacing: 0.5px;"><i class="fa-solid fa-mobile-screen" style="color: #fff;"></i> TikTok</span>
-                    <span style="background: #121212; border: 1px solid var(--border); padding: 8px 14px; border-radius: var(--radius); font-size: 0.8rem; letter-spacing: 0.5px;"><i class="fa-solid fa-heart" style="color: #fff;"></i> С девушкой</span>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Вечерний прайм-тайм</h3>
+                    <span class="card-tag">После 18:00</span>
+                </div>
+                <div style="display: flex; flex-wrap: gap: 8px; gap: 8px; margin-bottom: 20px;">
+                    <span style="background: #0d0d0d; border: 1px solid var(--border); padding: 8px 12px; border-radius: var(--radius); font-size: 0.78rem;">🚶‍♂️ Прогулка</span>
+                    <span style="background: #0d0d0d; border: 1px solid var(--border); padding: 8px 12px; border-radius: var(--radius); font-size: 0.78rem;">📱 TikTok</span>
+                    <span style="background: #0d0d0d; border: 1px solid var(--border); padding: 8px 12px; border-radius: var(--radius); font-size: 0.78rem;">❤️ Девушка</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="taskInput" placeholder="Личное дело на вечер..." style="margin-bottom:0;">
+                    <button class="btn" style="width: auto; padding: 0 20px;" onclick="addTask()"><i class="fa-solid fa-plus"></i></button>
                 </div>
             </div>
 
-            <div class="card full">
-                <h3><i class="fa-solid fa-list-check"></i> Личные вечерние задачи</h3>
-                <div style="display: flex; gap: 10px; margin-bottom: 16px;">
-                    <input type="text" id="taskInput" placeholder="Личное дело..." style="margin-bottom:0;">
-                    <button class="btn" style="width: auto; padding: 0 24px;" onclick="addTask()"><i class="fa-solid fa-plus"></i></button>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Задачи на вечер</h3>
+                    <span class="card-tag">Лайфстайл</span>
                 </div>
                 <ul id="taskList" class="list"></ul>
             </div>
         </div>
 
-        <!-- ПАПКА 3: КОНТЕНТ -->
+        <!-- РАЗДЕЛ 03: КОНТЕНТ -->
         <div id="content" class="section">
             <div class="card">
-                <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Сценарист & Хуки</h3>
+                <div class="card-header">
+                    <h3>Сценарист & Хуки</h3>
+                    <span class="card-tag">Ежедневно</span>
+                </div>
                 <div class="idea-box" id="ideaOutput">Генератор готовых хуков для роликов.</div>
                 <button class="btn btn-outline" onclick="generateIdea()" style="margin-bottom: 16px;"><i class="fa-solid fa-brain"></i> Сгенерировать идею</button>
 
                 <div class="timer-box">
-                    <span style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">Дедлайн постинга (21:00):</span>
+                    <span style="font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase;">Дедлайн постинга (21:00):</span>
                     <div class="timer-display" id="countdownTimer">00:00:00</div>
                 </div>
 
@@ -466,37 +403,47 @@
             </div>
 
             <div class="card">
-                <h3><i class="fa-solid fa-clapperboard"></i> Трекер публикаций</h3>
+                <div class="card-header">
+                    <h3>Трекер публикаций</h3>
+                    <span class="card-tag">Статусы</span>
+                </div>
                 <ul id="contentList" class="list"></ul>
             </div>
         </div>
 
-        <!-- ПАПКА 4: МУЗЫКА -->
+        <!-- РАЗДЕЛ 04: МУЗЫКА -->
         <div id="music" class="section">
             <div class="card">
-                <h3><i class="fa-solid fa-guitar"></i> Музыкальный трекер</h3>
-                <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 16px; letter-spacing: 0.5px;">Цель: 2 сессии в неделю.</p>
-                
-                <div style="background: #121212; border: 1px solid var(--border); padding: 16px; border-radius: var(--radius); margin-bottom: 16px;">
-                    <strong style="color: #fff; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;">Статус недели:</strong>
-                    <div style="margin-top: 6px; font-size: 0.9rem;" id="musicTrackerStatus">Записей: 0 из 2</div>
+                <div class="card-header">
+                    <h3>Музыкальный трекер</h3>
+                    <span class="card-tag">Цель: 2 р/нед</span>
+                </div>
+                <div style="background: #090909; border: 1px solid var(--border); padding: 14px; border-radius: var(--radius); margin-bottom: 16px;">
+                    <span style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">Статус недели:</span>
+                    <div style="margin-top: 4px; font-weight: 700; font-size: 0.9rem;" id="musicTrackerStatus">Записей: 0 из 2</div>
                 </div>
 
                 <input type="date" id="musicDate">
                 <input type="text" id="musicNote" placeholder="Что делал (бит, гитара)...">
-                <button class="btn" onclick="addMusicSession()"><i class="fa-solid fa-plus"></i> Зафиксировать</button>
+                <button class="btn" onclick="addMusicSession()"><i class="fa-solid fa-plus"></i> Зафиксировать сессию</button>
             </div>
 
             <div class="card">
-                <h3><i class="fa-solid fa-list"></i> История сессий</h3>
+                <div class="card-header">
+                    <h3>Архив сессий</h3>
+                    <span class="card-tag">История</span>
+                </div>
                 <ul id="musicList" class="list"></ul>
             </div>
         </div>
 
-        <!-- ПАПКА 5: АНАЛИТИКА -->
+        <!-- РАЗДЕЛ 05: АНАЛИТИКА -->
         <div id="analytics" class="section">
             <div class="card">
-                <h3><i class="fa-solid fa-chart-line"></i> Охваты по площадкам</h3>
+                <div class="card-header">
+                    <h3>Охваты соцсетей</h3>
+                    <span class="card-tag">Статистика</span>
+                </div>
                 <input type="date" id="statDate">
                 <select id="statPlatform">
                     <option value="TikTok">TikTok</option>
@@ -504,26 +451,28 @@
                     <option value="YouTube Shorts">YouTube Shorts</option>
                 </select>
                 <input type="number" id="statViews" placeholder="Просмотры / Охваты...">
-                <button class="btn" onclick="addStat()"><i class="fa-solid fa-floppy-disk"></i> Сохранить</button>
+                <button class="btn" onclick="addStat()"><i class="fa-solid fa-floppy-disk"></i> Сохранить охват</button>
             </div>
 
             <div class="card">
-                <h3><i class="fa-solid fa-chart-pie"></i> Детальная статистика</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
-                    <div style="background: #121212; padding: 14px; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
-                        <span style="font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">Записей</span>
-                        <div id="totalStatsCount" style="font-size: 1.3rem; font-weight: 700; color: #fff; margin-top: 4px;">0</div>
+                <div class="card-header">
+                    <h3>Показатели</h3>
+                    <span class="card-tag">Итог</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;">
+                    <div style="background: #090909; padding: 14px; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
+                        <span style="font-size: 0.65rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">Записей</span>
+                        <div id="totalStatsCount" style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-top: 2px;">0</div>
                     </div>
-                    <div style="background: #121212; padding: 14px; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
-                        <span style="font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">Суммарный охват</span>
-                        <div id="totalViewsSum" style="font-size: 1.3rem; font-weight: 700; color: #fff; margin-top: 4px;">0</div>
+                    <div style="background: #090909; padding: 14px; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
+                        <span style="font-size: 0.65rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">Охват суммарно</span>
+                        <div id="totalViewsSum" style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-top: 2px;">0</div>
                     </div>
                 </div>
                 <ul id="statsList" class="list"></ul>
             </div>
         </div>
-
-    </main>
+    </div>
 
     <script>
         setInterval(() => {
@@ -532,19 +481,9 @@
 
         function switchTab(sectionId, btn) {
             document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.menu-btn').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
             btn.classList.add('active');
-
-            const titles = {
-                'work': ['Работа (до 16:00-18:00)', 'Основной рабочий блок, таблицы и поиск блогеров'],
-                'routine': ['Личная рутина (Вечер)', 'Отдых, прогулки, TikTok и время для девушки'],
-                'content': ['Контент & Сценарии', 'Генератор хуков и трекер публикаций'],
-                'music': ['Музыка & Трекер', 'Контроль создания музыки (цель: 2 раза в неделю)'],
-                'analytics': ['Аналитика охватов', 'Подробная статистика по площадкам (TikTok, Insta, YouTube)']
-            };
-            document.getElementById('pageTitle').innerText = titles[sectionId][0];
-            document.getElementById('pageSubtitle').innerText = titles[sectionId][1];
         }
 
         setInterval(() => {
@@ -560,7 +499,7 @@
                 const s = String(Math.floor((workDiff / 1000) % 60)).padStart(2, '0');
                 if(workTimerEl) workTimerEl.innerText = `${h}:${m}:${s}`;
             } else {
-                if(workTimerEl) workTimerEl.innerText = "РАБОЧИЙ ДЕНЬ ОКОНЧЕН";
+                if(workTimerEl) workTimerEl.innerText = "СМЕНА ОКОНЧЕНА";
             }
 
             const postTarget = new Date();
@@ -682,7 +621,7 @@
                     <li class="item ${item.status === '🚀 Готово к выкладке' ? 'done' : ''}">
                         <div>
                             <strong>${item.title}</strong><br>
-                            <span style="font-size: 0.75rem; color: var(--text-muted);">${item.status}</span>
+                            <span style="font-size: 0.72rem; color: var(--text-muted);">${item.status}</span>
                         </div>
                         <div class="item-actions">
                             <button class="action-btn del" onclick="deleteContent(${i})"><i class="fa-solid fa-trash"></i></button>
@@ -779,3 +718,4 @@
     </script>
 </body>
 </html>
+
