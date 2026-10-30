@@ -3,26 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KASHENKO // OS — Ultimate Life Dashboard</title>
+    <title>KASHENKO // OS — Mobile Optimized</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg: #030508;
-            --surface: #0a0e17;
-            --surface-card: #111726;
-            --border: rgba(255, 255, 255, 0.07);
-            --border-glow: rgba(59, 130, 246, 0.35);
+            --bg: #05070b;
+            --surface: #0e121d;
+            --surface-card: #131b2e;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(59, 130, 246, 0.4);
             --text-main: #f8fafc;
             --text-muted: #8b95a5;
             --accent-blue: #3b82f6;
             --accent-purple: #8b5cf6;
-            --accent-pink: #ec4899;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --radius: 18px;
+            --radius: 16px;
         }
 
         * {
@@ -36,23 +35,23 @@
         body {
             background-color: var(--bg);
             background-image: 
-                radial-gradient(circle at 15% 10%, rgba(59, 130, 246, 0.08) 0%, transparent 45%),
-                radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.08) 0%, transparent 45%);
+                radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 90% 90%, rgba(139, 92, 246, 0.08) 0%, transparent 45%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
-            overflow-x: hidden;
+            flex-direction: column;
         }
 
-        /* Боковая навигация */
+        /* Десктопный сайдбар */
         aside {
-            width: 290px;
+            width: 280px;
             background: var(--surface);
             border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 28px;
+            padding: 24px;
             height: 100vh;
             position: fixed;
             left: 0;
@@ -65,23 +64,23 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 800;
             letter-spacing: -0.5px;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             color: #fff;
         }
 
         .brand-icon {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
-            font-size: 1.1rem;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            font-size: 0.95rem;
         }
 
         .menu {
@@ -89,6 +88,7 @@
             flex-direction: column;
             gap: 6px;
             flex: 1;
+            overflow-y: auto;
         }
 
         .menu-btn {
@@ -96,35 +96,34 @@
             border: none;
             color: var(--text-muted);
             padding: 12px 16px;
-            border-radius: 14px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
             font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 12px;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             text-align: left;
         }
 
         .menu-btn:hover {
             background: rgba(255, 255, 255, 0.03);
             color: var(--text-main);
-            transform: translateX(4px);
         }
 
         .menu-btn.active {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: #fff;
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.35);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
         }
 
         .system-status-card {
             background: rgba(255, 255, 255, 0.02);
-            padding: 14px;
-            border-radius: 14px;
+            padding: 12px;
+            border-radius: 12px;
             border: 1px solid var(--border);
-            font-size: 0.82rem;
+            font-size: 0.78rem;
             color: var(--text-muted);
         }
 
@@ -138,30 +137,30 @@
         }
 
         .status-dot {
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             background: var(--success);
             border-radius: 50%;
             box-shadow: 0 0 10px var(--success);
         }
 
-        /* Главный контейнер */
+        /* Основной контент */
         main {
-            margin-left: 290px;
+            margin-left: 280px;
             flex: 1;
-            padding: 40px;
-            max-width: calc(100vw - 290px);
+            padding: 32px;
+            max-width: calc(100vw - 280px);
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 36px;
+            margin-bottom: 28px;
         }
 
         .header-title h1 {
-            font-size: 1.85rem;
+            font-size: 1.6rem;
             font-weight: 800;
             letter-spacing: -0.8px;
             background: linear-gradient(135deg, #fff 30%, #94a3b8 100%);
@@ -171,17 +170,17 @@
 
         .header-title p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             margin-top: 4px;
         }
 
         .badge-widget {
             background: var(--surface);
             border: 1px solid var(--border);
-            padding: 10px 18px;
-            border-radius: 16px;
+            padding: 8px 16px;
+            border-radius: 14px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
@@ -190,7 +189,7 @@
         .section {
             display: none;
             grid-template-columns: repeat(12, 1fr);
-            gap: 24px;
+            gap: 20px;
             animation: fadeIn 0.3s ease;
         }
 
@@ -199,7 +198,7 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -208,35 +207,36 @@
             background: var(--surface-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 28px;
+            padding: 24px;
             grid-column: span 6;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.35);
-            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: border-color 0.2s;
         }
 
+        .card:hover { border-color: var(--border-glow); }
         .card.full { grid-column: span 12; }
 
         .card h3 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             color: var(--text-main);
         }
 
         input, select, textarea {
             width: 100%;
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border);
             color: var(--text-main);
-            padding: 14px 18px;
-            border-radius: 14px;
-            margin-bottom: 14px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
             font-size: 0.95rem;
             outline: none;
-            transition: all 0.2s;
+            transition: border-color 0.2s;
         }
 
         input:focus, select:focus, textarea:focus {
@@ -248,68 +248,68 @@
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
             border: none;
-            padding: 14px 22px;
-            border-radius: 14px;
+            padding: 12px 20px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 700;
             width: 100%;
             transition: all 0.2s;
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 0.95rem;
         }
 
         .btn:hover { opacity: 0.92; transform: translateY(-1px); }
-        .btn-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35); }
-        .btn-success { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35); }
-        .btn-orange { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35); }
-        .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35); }
+        .btn-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); }
+        .btn-success { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+        .btn-orange { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
+        .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); }
 
         .timer-box {
-            background: rgba(245, 158, 11, 0.05);
+            background: rgba(245, 158, 11, 0.04);
             border: 1px solid rgba(245, 158, 11, 0.2);
-            padding: 22px;
-            border-radius: 16px;
+            padding: 16px;
+            border-radius: 14px;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .timer-display {
-            font-size: 2.3rem;
+            font-size: 1.9rem;
             font-weight: 800;
             color: var(--warning);
-            margin-top: 6px;
+            margin-top: 4px;
             letter-spacing: 1px;
             font-variant-numeric: tabular-nums;
         }
 
         ul.list {
             list-style: none;
-            max-height: 360px;
+            max-height: 320px;
             overflow-y: auto;
             padding-right: 4px;
         }
 
-        ul.list::-webkit-scrollbar { width: 5px; }
+        ul.list::-webkit-scrollbar { width: 4px; }
         ul.list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 
         li.item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 18px;
-            background: rgba(255, 255, 255, 0.02);
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.015);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            margin-bottom: 10px;
-            transition: background 0.2s;
+            border-radius: 12px;
+            margin-bottom: 8px;
         }
 
         li.item.done span, li.item.done strong { text-decoration: line-through; color: var(--text-muted); opacity: 0.6; }
 
-        .item-actions { display: flex; gap: 10px; align-items: center; }
+        .item-actions { display: flex; gap: 8px; align-items: center; }
 
         .action-btn {
             background: none;
@@ -317,29 +317,85 @@
             cursor: pointer;
             color: var(--text-muted);
             font-size: 1rem;
-            transition: color 0.2s;
+            padding: 4px;
         }
         .action-btn.del:hover { color: var(--danger); }
         .action-btn.chk:hover { color: var(--success); }
 
         .idea-box {
-            background: rgba(139, 92, 246, 0.08);
-            border: 1px solid rgba(139, 92, 246, 0.25);
-            padding: 18px;
-            border-radius: 14px;
-            margin-bottom: 16px;
+            background: rgba(139, 92, 246, 0.06);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 14px;
+            border-radius: 12px;
+            margin-bottom: 12px;
             font-weight: 600;
             color: #d8b4fe;
             display: none;
-            line-height: 1.5;
+            font-size: 0.88rem;
+            line-height: 1.4;
         }
 
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ */
         @media (max-width: 900px) {
-            aside { width: 100%; height: auto; position: relative; flex-direction: row; padding: 16px; align-items: center; }
-            .menu { display: none; }
-            .system-status-card { display: none; }
-            main { margin-left: 0; max-width: 100%; padding: 16px; }
-            .card { grid-column: span 12; }
+            body {
+                flex-direction: column;
+            }
+            aside {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                align-items: center;
+                padding: 12px 16px;
+                gap: 12px;
+                overflow-x: auto;
+            }
+            .brand {
+                margin-bottom: 0;
+                font-size: 1rem;
+            }
+            .brand-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+            .menu {
+                flex-direction: row;
+                gap: 6px;
+                overflow-x: auto;
+                padding-bottom: 4px;
+            }
+            .menu-btn {
+                padding: 8px 12px;
+                font-size: 0.82rem;
+                white-space: nowrap;
+                border-radius: 10px;
+            }
+            .system-status-card {
+                display: none;
+            }
+            main {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 16px;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            .badge-widget {
+                align-self: flex-end;
+                margin-top: -35px;
+            }
+            .card {
+                grid-column: span 12;
+                padding: 18px;
+            }
+            .timer-display {
+                font-size: 1.6rem;
+            }
         }
     </style>
 </head>
@@ -347,25 +403,23 @@
 
     <!-- Навигация -->
     <aside>
-        <div>
-            <div class="brand">
-                <div class="brand-icon"><i class="fa-solid fa-bolt"></i></div>
-                <span>KASHENKO // OS</span>
-            </div>
-            <div class="menu">
-                <button class="menu-btn active" onclick="switchTab('work', this)"><i class="fa-solid fa-briefcase"></i> 1. Работа (до 16:00-18:00)</button>
-                <button class="menu-btn" onclick="switchTab('routine', this)"><i class="fa-solid fa-moon"></i> 2. Личная рутина (Вечер)</button>
-                <button class="menu-btn" onclick="switchTab('content', this)"><i class="fa-solid fa-video"></i> 3. Контент & Сценарии</button>
-                <button class="menu-btn" onclick="switchTab('music', this)"><i class="fa-solid fa-guitar"></i> 4. Музыка & Трекер</button>
-                <button class="menu-btn" onclick="switchTab('analytics', this)"><i class="fa-solid fa-chart-line"></i> 5. Аналитика охватов</button>
-            </div>
+        <div class="brand">
+            <div class="brand-icon"><i class="fa-solid fa-code-branch"></i></div>
+            <span>KASHENKO // OS</span>
+        </div>
+        <div class="menu">
+            <button class="menu-btn active" onclick="switchTab('work', this)"><i class="fa-solid fa-briefcase"></i> 1. Работа</button>
+            <button class="menu-btn" onclick="switchTab('routine', this)"><i class="fa-solid fa-moon"></i> 2. Рутина</button>
+            <button class="menu-btn" onclick="switchTab('content', this)"><i class="fa-solid fa-video"></i> 3. Контент</button>
+            <button class="menu-btn" onclick="switchTab('music', this)"><i class="fa-solid fa-guitar"></i> 4. Музыка</button>
+            <button class="menu-btn" onclick="switchTab('analytics', this)"><i class="fa-solid fa-chart-line"></i> 5. Охваты</button>
         </div>
         <div class="system-status-card">
             <div class="status-indicator">
                 <div class="status-dot"></div>
-                <span id="systemModeText">Рабочий режим</span>
+                <span id="systemModeText">Активен</span>
             </div>
-            <span style="font-size: 0.78rem; color: var(--text-muted);" id="systemSubText">Поиск блогеров, таблицы, задачи</span>
+            <span style="font-size: 0.7rem; color: var(--text-muted);" id="systemSubText">Синхронизировано</span>
         </div>
     </aside>
 
@@ -384,52 +438,52 @@
             <div class="card">
                 <h3><i class="fa-solid fa-briefcase" style="color: var(--warning);"></i> Тайм-менеджмент дня</h3>
                 <div class="timer-box">
-                    <span style="font-size: 0.85rem; color: var(--text-muted);">До конца рабочего дня осталось:</span>
+                    <span style="font-size: 0.78rem; color: var(--text-muted);">До конца рабочего дня:</span>
                     <div class="timer-display" id="workCountdown">00:00:00</div>
                 </div>
-                <input type="text" id="workTaskInput" placeholder="Задача (например: Поиск блогеров, заполнить таблицу)...">
-                <button class="btn btn-orange" onclick="addWorkTask()"><i class="fa-solid fa-plus"></i> Добавить в рабочие задачи</button>
+                <input type="text" id="workTaskInput" placeholder="Задача (поиск блогеров, таблицы)...">
+                <button class="btn btn-orange" onclick="addWorkTask()"><i class="fa-solid fa-plus"></i> Добавить задачу</button>
             </div>
 
             <div class="card">
-                <h3><i class="fa-solid fa-clipboard-check" style="color: var(--success);"></i> Итоги дня и перенос задач</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 14px;">Отметь выполненное. Невыполненные задачи можно перенести на завтра.</p>
-                <button class="btn btn-danger" onclick="carryOverTasks()" style="margin-bottom: 14px;"><i class="fa-solid fa-share"></i> Перенести несделанное на завтра</button>
+                <h3><i class="fa-solid fa-clipboard-check" style="color: var(--success);"></i> Итоги дня и перенос</h3>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 12px;">Невыполненные задачи можно перенести на завтра.</p>
+                <button class="btn btn-danger" onclick="carryOverTasks()" style="margin-bottom: 12px;"><i class="fa-solid fa-share"></i> Перенести несделанное</button>
                 <ul id="workList" class="list"></ul>
             </div>
         </div>
 
-        <!-- ПАПКА 2: ЛИЧНАЯ РУТИНА (ВЕЧЕР) -->
+        <!-- ПАПКА 2: ЛИЧНАЯ РУТИНА -->
         <div id="routine" class="section">
             <div class="card full">
-                <h3><i class="fa-solid fa-moon" style="color: var(--purple);"></i> Вечернее расслабление & Лайфстайл (После 18:00)</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px;">Время для отдыха, прогулок, TikTok и общения с девушкой.</p>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    <span style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 8px 14px; border-radius: 12px; font-size: 0.85rem;"><i class="fa-solid fa-person-walking" style="color: #34d399;"></i> Прогулка на свежем воздухе</span>
-                    <span style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 8px 14px; border-radius: 12px; font-size: 0.85rem;"><i class="fa-solid fa-mobile-screen" style="color: #60a5fa;"></i> Посмотреть TikTok</span>
-                    <span style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 8px 14px; border-radius: 12px; font-size: 0.85rem;"><i class="fa-solid fa-heart" style="color: #f472b6;"></i> Время для девушки</span>
+                <h3><i class="fa-solid fa-moon" style="color: var(--purple);"></i> Вечерний лайфстайл (После 18:00)</h3>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 12px;">Отдых, прогулки, TikTok и общение с девушкой.</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 6px 10px; border-radius: 8px; font-size: 0.78rem;"><i class="fa-solid fa-person-walking" style="color: #34d399;"></i> Прогулка</span>
+                    <span style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 6px 10px; border-radius: 8px; font-size: 0.78rem;"><i class="fa-solid fa-mobile-screen" style="color: #60a5fa;"></i> TikTok</span>
+                    <span style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 6px 10px; border-radius: 8px; font-size: 0.78rem;"><i class="fa-solid fa-heart" style="color: #f472b6;"></i> С девушкой</span>
                 </div>
             </div>
 
             <div class="card full">
                 <h3><i class="fa-solid fa-list-check" style="color: var(--accent-blue);"></i> Личные вечерние задачи</h3>
-                <div style="display: flex; gap: 10px; margin-bottom: 14px;">
-                    <input type="text" id="taskInput" placeholder="Личное дело на вечер..." style="margin-bottom:0;">
-                    <button class="btn" style="width: auto; padding: 0 20px;" onclick="addTask()"><i class="fa-solid fa-plus"></i></button>
+                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                    <input type="text" id="taskInput" placeholder="Личное дело..." style="margin-bottom:0;">
+                    <button class="btn" style="width: auto; padding: 0 16px;" onclick="addTask()"><i class="fa-solid fa-plus"></i></button>
                 </div>
                 <ul id="taskList" class="list"></ul>
             </div>
         </div>
 
-        <!-- ПАПКА 3: КОНТЕНТ И СЦЕНАРИИ -->
+        <!-- ПАПКА 3: КОНТЕНТ -->
         <div id="content" class="section">
             <div class="card">
                 <h3><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-purple);"></i> Сценарист & Хуки</h3>
-                <div class="idea-box" id="ideaOutput">Генератор готовых хуков и тем для роликов.</div>
-                <button class="btn btn-purple" onclick="generateIdea()" style="margin-bottom: 14px;"><i class="fa-solid fa-brain"></i> Сгенерировать идею</button>
+                <div class="idea-box" id="ideaOutput">Генератор готовых хуков для роликов.</div>
+                <button class="btn btn-purple" onclick="generateIdea()" style="margin-bottom: 12px;"><i class="fa-solid fa-brain"></i> Сгенерировать идею</button>
 
                 <div class="timer-box">
-                    <span style="font-size: 0.85rem; color: var(--text-muted);">До дедлайна постинга (21:00):</span>
+                    <span style="font-size: 0.78rem; color: var(--text-muted);">До дедлайна постинга (21:00):</span>
                     <div class="timer-display" id="countdownTimer">00:00:00</div>
                 </div>
 
@@ -444,25 +498,25 @@
             </div>
 
             <div class="card">
-                <h3><i class="fa-solid fa-clapperboard" style="color: var(--success);"></i> Трекер публикаций (Снято / Сделано)</h3>
+                <h3><i class="fa-solid fa-clapperboard" style="color: var(--success);"></i> Трекер публикаций</h3>
                 <ul id="contentList" class="list"></ul>
             </div>
         </div>
 
-        <!-- ПАПКА 4: МУЗЫКА И ТРЕКЕР -->
+        <!-- ПАПКА 4: МУЗЫКА -->
         <div id="music" class="section">
             <div class="card">
-                <h3><i class="fa-solid fa-guitar" style="color: var(--accent-purple);"></i> График музыкальных сессий</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">Цель: работать над треками строго **2 раза в неделю** (например, Вторник и Четверг).</p>
+                <h3><i class="fa-solid fa-guitar" style="color: var(--accent-purple);"></i> Музыкальный трекер</h3>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 12px;">Цель: 2 раза в неделю.</p>
                 
-                <div style="background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.2); padding: 16px; border-radius: 14px; margin-bottom: 16px;">
-                    <strong style="color: var(--accent-purple);">📊 Трекер недели:</strong>
-                    <div style="margin-top: 8px; font-size: 0.95rem;" id="musicTrackerStatus">Записей на этой неделе: 0 из 2</div>
+                <div style="background: rgba(139, 92, 246, 0.04); border: 1px solid rgba(139, 92, 246, 0.2); padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+                    <strong style="color: var(--accent-purple); font-size: 0.85rem;">📊 Статус недели:</strong>
+                    <div style="margin-top: 4px; font-size: 0.85rem;" id="musicTrackerStatus">Записей: 0 из 2</div>
                 </div>
 
                 <input type="date" id="musicDate">
-                <input type="text" id="musicNote" placeholder="Что делал (бит, вокал, аранжировка)...">
-                <button class="btn btn-purple" onclick="addMusicSession()"><i class="fa-solid fa-plus"></i> Зафиксировать сессию</button>
+                <input type="text" id="musicNote" placeholder="Что делал (бит, гитара)...">
+                <button class="btn btn-purple" onclick="addMusicSession()"><i class="fa-solid fa-plus"></i> Зафиксировать</button>
             </div>
 
             <div class="card">
@@ -471,30 +525,30 @@
             </div>
         </div>
 
-        <!-- ПАПКА 5: ПОДРОБНАЯ АНАЛИТИКА ОХВАТОВ -->
+        <!-- ПАПКА 5: АНАЛИТИКА -->
         <div id="analytics" class="section">
             <div class="card">
-                <h3><i class="fa-solid fa-chart-line" style="color: var(--success);"></i> Внести охваты по площадкам</h3>
+                <h3><i class="fa-solid fa-chart-line" style="color: var(--success);"></i> Охваты по площадкам</h3>
                 <input type="date" id="statDate">
                 <select id="statPlatform">
                     <option value="TikTok">🎵 TikTok</option>
                     <option value="Instagram Reels">📸 Instagram Reels</option>
                     <option value="YouTube Shorts">▶️ YouTube Shorts</option>
                 </select>
-                <input type="number" id="statViews" placeholder="Просмотры / Охваты (число)...">
-                <button class="btn btn-success" onclick="addStat()"><i class="fa-solid fa-floppy-disk"></i> Сохранить статистику</button>
+                <input type="number" id="statViews" placeholder="Просмотры / Охваты...">
+                <button class="btn btn-success" onclick="addStat()"><i class="fa-solid fa-floppy-disk"></i> Сохранить</button>
             </div>
 
             <div class="card">
-                <h3><i class="fa-solid fa-chart-pie"></i> Подробная статистика</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
-                    <div style="background: rgba(0,0,0,0.3); padding: 16px; border-radius: 14px; border: 1px solid var(--border); text-align: center;">
-                        <span style="font-size: 0.8rem; color: var(--text-muted);">Всего записей</span>
-                        <div id="totalStatsCount" style="font-size: 1.5rem; font-weight: 800; color: var(--accent-blue); margin-top: 4px;">0</div>
+                <h3><i class="fa-solid fa-chart-pie"></i> Детальная статистика</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+                    <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 10px; border: 1px solid var(--border); text-align: center;">
+                        <span style="font-size: 0.7rem; color: var(--text-muted);">Записей</span>
+                        <div id="totalStatsCount" style="font-size: 1.2rem; font-weight: 800; color: var(--accent-blue); margin-top: 2px;">0</div>
                     </div>
-                    <div style="background: rgba(0,0,0,0.3); padding: 16px; border-radius: 14px; border: 1px solid var(--border); text-align: center;">
-                        <span style="font-size: 0.8rem; color: var(--text-muted);">Суммарный охват</span>
-                        <div id="totalViewsSum" style="font-size: 1.5rem; font-weight: 800; color: var(--success); margin-top: 4px;">0</div>
+                    <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 10px; border: 1px solid var(--border); text-align: center;">
+                        <span style="font-size: 0.7rem; color: var(--text-muted);">Суммарный охват</span>
+                        <div id="totalViewsSum" style="font-size: 1.2rem; font-weight: 800; color: var(--success); margin-top: 2px;">0</div>
                     </div>
                 </div>
                 <ul id="statsList" class="list"></ul>
@@ -504,16 +558,13 @@
     </main>
 
     <script>
-        // Часы
         setInterval(() => {
             document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('ru-RU');
         }, 1000);
 
-        // Переключение вкладок
         function switchTab(sectionId, btn) {
             document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.menu-btn').forEach(el => el.classList.remove('active'));
-            
             document.getElementById(sectionId).classList.add('active');
             btn.classList.add('active');
 
@@ -528,7 +579,6 @@
             document.getElementById('pageSubtitle').innerText = titles[sectionId][1];
         }
 
-        // Таймеры
         setInterval(() => {
             const now = new Date();
             const workTarget = new Date();
@@ -556,7 +606,6 @@
             if(timerEl) timerEl.innerText = `${ph}:${pm}:${ps}`;
         }, 1000);
 
-        // Генератор идей
         const contentScripts = [
             "Хук: «Никому не говорите об этом трюке с поиском блогеров!»",
             "Хук: «Как успевать работать до 18:00 и качать музыку без выгорания»",
@@ -570,7 +619,6 @@
             document.getElementById('contentTitle').value = randomScript.replace('Хук: ', '').replace('«', '').replace('»', '');
         }
 
-        // Данные
         let workTasks = JSON.parse(localStorage.getItem('my_work_tasks')) || [
             { text: 'Поиск блогеров в базу', completed: false },
             { text: 'Заполнение рабочих таблиц', completed: false }
@@ -583,7 +631,6 @@
         let musicSessions = JSON.parse(localStorage.getItem('my_music')) || [];
         let stats = JSON.parse(localStorage.getItem('my_stats')) || [];
 
-        // Работа
         function renderWorkTasks() {
             const list = document.getElementById('workList');
             list.innerHTML = '';
@@ -620,13 +667,10 @@
         }
 
         function carryOverTasks() {
-            // Удаляем выполненные, оставляем невыполненные на завтра
             workTasks = workTasks.filter(w => !w.completed);
             renderWorkTasks();
-            alert("Выполненные задачи очищены. Несделанные остались в плане на завтра!");
         }
 
-        // Рутина
         function renderTasks() {
             const list = document.getElementById('taskList');
             list.innerHTML = '';
@@ -662,7 +706,6 @@
             renderTasks();
         }
 
-        // Контент
         function renderContent() {
             const list = document.getElementById('contentList');
             list.innerHTML = '';
@@ -671,7 +714,7 @@
                     <li class="item ${item.status === '🚀 Готово к выкладке' ? 'done' : ''}">
                         <div>
                             <strong>${item.title}</strong><br>
-                            <span style="font-size: 0.8rem; color: var(--accent-blue);">${item.status}</span>
+                            <span style="font-size: 0.75rem; color: var(--accent-blue);">${item.status}</span>
                         </div>
                         <div class="item-actions">
                             <button class="action-btn del" onclick="deleteContent(${i})"><i class="fa-solid fa-trash"></i></button>
@@ -696,7 +739,6 @@
             renderContent();
         }
 
-        // Музыка и трекер цели 2 р/нед
         function renderMusic() {
             const list = document.getElementById('musicList');
             list.innerHTML = '';
@@ -708,7 +750,7 @@
                     </li>
                 `;
             });
-            document.getElementById('musicTrackerStatus').innerText = `Записей зафиксировано: ${musicSessions.length} (Цель: 2 в неделю)`;
+            document.getElementById('musicTrackerStatus').innerText = `Записей: ${musicSessions.length} (Цель: 2/нед)`;
             localStorage.setItem('my_music', JSON.stringify(musicSessions));
         }
 
@@ -726,7 +768,6 @@
             renderMusic();
         }
 
-        // Подробная аналитика
         function renderStats() {
             const list = document.getElementById('statsList');
             list.innerHTML = '';
@@ -738,7 +779,7 @@
                         <div>
                             <span>📅 ${s.date} [<b>${s.platform}</b>]</span>
                         </div>
-                        <strong style="color: var(--success);">👁️ ${Number(s.views).toLocaleString()} охват</strong>
+                        <strong style="color: var(--success);">👁️ ${Number(s.views).toLocaleString()}</strong>
                         <button class="action-btn del" onclick="deleteStat(${i})"><i class="fa-solid fa-trash"></i></button>
                     </li>
                 `;
@@ -769,6 +810,4 @@
         renderStats();
     </script>
 </body>
-</html>
-
 </html>
