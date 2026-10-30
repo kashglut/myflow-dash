@@ -3,47 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KASHENKO // OS — Mobile Optimized</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>KASHENKO // ARCHIVE OS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg: #05070b;
-            --surface: #0e121d;
-            --surface-card: #131b2e;
-            --border: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(59, 130, 246, 0.4);
-            --text-main: #f8fafc;
-            --text-muted: #8b95a5;
-            --accent-blue: #3b82f6;
-            --accent-purple: #8b5cf6;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --radius: 16px;
+            --bg: #080808;
+            --surface: #101010;
+            --surface-card: #161616;
+            --border: #262626;
+            --border-hover: #ffffff;
+            --text-main: #ededed;
+            --text-muted: #737373;
+            --accent: #ffffff;
+            --danger: #ff3b30;
+            --success: #34c759;
+            --warning: #ffcc00;
+            --radius: 4px; /* Индустриальные четкие углы в стиле бренда */
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
         body {
             background-color: var(--bg);
-            background-image: 
-                radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.08) 0%, transparent 45%),
-                radial-gradient(circle at 90% 90%, rgba(139, 92, 246, 0.08) 0%, transparent 45%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* Десктопный сайдбар */
+        /* Архивный сайдбар */
         aside {
             width: 280px;
             background: var(--surface);
@@ -51,55 +47,57 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 24px;
+            padding: 28px;
             height: 100vh;
             position: fixed;
             left: 0;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(20px);
         }
 
         .brand {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.15rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 24px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 36px;
             color: #fff;
+            text-transform: uppercase;
         }
 
         .brand-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 10px;
+            width: 32px;
+            height: 32px;
+            background: #fff;
+            color: #000;
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            font-weight: 800;
         }
 
         .menu {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
             flex: 1;
-            overflow-y: auto;
         }
 
         .menu-btn {
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 12px 16px;
-            border-radius: 12px;
+            padding: 14px 16px;
+            border-radius: var(--radius);
             cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             display: flex;
             align-items: center;
             gap: 12px;
@@ -108,89 +106,93 @@
         }
 
         .menu-btn:hover {
-            background: rgba(255, 255, 255, 0.03);
             color: var(--text-main);
+            background: rgba(255,255,255,0.03);
         }
 
         .menu-btn.active {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            color: #fff;
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+            background: #fff;
+            color: #000;
+            font-weight: 700;
         }
 
         .system-status-card {
             background: rgba(255, 255, 255, 0.02);
-            padding: 12px;
-            border-radius: 12px;
+            padding: 14px;
+            border-radius: var(--radius);
             border: 1px solid var(--border);
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .status-indicator {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--success);
+            color: #fff;
             font-weight: 700;
             margin-bottom: 4px;
         }
 
         .status-dot {
-            width: 7px;
-            height: 7px;
-            background: var(--success);
+            width: 6px;
+            height: 6px;
+            background: #fff;
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--success);
+            box-shadow: 0 0 8px #fff;
         }
 
         /* Основной контент */
         main {
             margin-left: 280px;
             flex: 1;
-            padding: 32px;
+            padding: 48px;
             max-width: calc(100vw - 280px);
         }
 
         header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 28px;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 24px;
         }
 
         .header-title h1 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            letter-spacing: -0.8px;
-            background: linear-gradient(135deg, #fff 30%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            color: #fff;
         }
 
         .header-title p {
             color: var(--text-muted);
             font-size: 0.85rem;
-            margin-top: 4px;
+            margin-top: 6px;
+            letter-spacing: 0.5px;
         }
 
         .badge-widget {
             background: var(--surface);
             border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 14px;
+            padding: 10px 20px;
+            border-radius: var(--radius);
             font-weight: 600;
             font-size: 0.85rem;
-            color: var(--text-muted);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            color: var(--text-main);
+            letter-spacing: 1px;
         }
 
         /* Секции */
         .section {
             display: none;
             grid-template-columns: repeat(12, 1fr);
-            gap: 20px;
-            animation: fadeIn 0.3s ease;
+            gap: 24px;
+            animation: fadeIn 0.25s ease;
         }
 
         .section.active {
@@ -198,228 +200,194 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Карточки */
+        /* Карточки в стиле гранж-архива */
         .card {
             background: var(--surface-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 24px;
+            padding: 32px;
             grid-column: span 6;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transition: border-color 0.2s;
+            position: relative;
         }
 
-        .card:hover { border-color: var(--border-glow); }
+        .card:hover { border-color: var(--border-hover); }
         .card.full { grid-column: span 12; }
 
         .card h3 {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: var(--text-main);
+            gap: 12px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         input, select, textarea {
             width: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: #0a0a0a;
             border: 1px solid var(--border);
             color: var(--text-main);
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            font-size: 0.95rem;
+            padding: 14px 18px;
+            border-radius: var(--radius);
+            margin-bottom: 14px;
+            font-size: 0.9rem;
             outline: none;
             transition: border-color 0.2s;
+            letter-spacing: 0.5px;
         }
 
         input:focus, select:focus, textarea:focus {
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            border-color: #fff;
         }
 
         .btn {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            color: white;
+            background: #fff;
+            color: #000;
             border: none;
-            padding: 12px 20px;
-            border-radius: 12px;
+            padding: 14px 22px;
+            border-radius: var(--radius);
             cursor: pointer;
             font-weight: 700;
             width: 100%;
             transition: all 0.2s;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            font-size: 0.95rem;
+            gap: 10px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
 
-        .btn:hover { opacity: 0.92; transform: translateY(-1px); }
-        .btn-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); }
-        .btn-success { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
-        .btn-orange { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
-        .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); }
+        .btn:hover { background: #d4d4d4; }
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: #fff; }
+        .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
 
         .timer-box {
-            background: rgba(245, 158, 11, 0.04);
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            padding: 16px;
-            border-radius: 14px;
+            background: #0a0a0a;
+            border: 1px solid var(--border);
+            padding: 24px;
+            border-radius: var(--radius);
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .timer-display {
-            font-size: 1.9rem;
-            font-weight: 800;
-            color: var(--warning);
-            margin-top: 4px;
-            letter-spacing: 1px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 6px;
+            letter-spacing: 2px;
             font-variant-numeric: tabular-nums;
         }
 
         ul.list {
             list-style: none;
-            max-height: 320px;
+            max-height: 340px;
             overflow-y: auto;
             padding-right: 4px;
         }
 
-        ul.list::-webkit-scrollbar { width: 4px; }
-        ul.list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        ul.list::-webkit-scrollbar { width: 3px; }
+        ul.list::-webkit-scrollbar-thumb { background: var(--border); }
 
         li.item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.015);
+            padding: 16px 18px;
+            background: #121212;
             border: 1px solid var(--border);
-            border-radius: 12px;
-            margin-bottom: 8px;
+            border-radius: var(--radius);
+            margin-bottom: 10px;
+            transition: border-color 0.2s;
         }
 
-        li.item.done span, li.item.done strong { text-decoration: line-through; color: var(--text-muted); opacity: 0.6; }
+        li.item:hover { border-color: #404040; }
+        li.item.done span, li.item.done strong { text-decoration: line-through; color: var(--text-muted); opacity: 0.5; }
 
-        .item-actions { display: flex; gap: 8px; align-items: center; }
+        .item-actions { display: flex; gap: 10px; align-items: center; }
 
         .action-btn {
             background: none;
             border: none;
             cursor: pointer;
             color: var(--text-muted);
-            font-size: 1rem;
-            padding: 4px;
+            font-size: 0.95rem;
+            transition: color 0.2s;
         }
         .action-btn.del:hover { color: var(--danger); }
         .action-btn.chk:hover { color: var(--success); }
 
         .idea-box {
-            background: rgba(139, 92, 246, 0.06);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            padding: 14px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            font-weight: 600;
-            color: #d8b4fe;
+            background: #121212;
+            border: 1px solid var(--border);
+            padding: 18px;
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+            font-weight: 500;
+            color: #fff;
             display: none;
             font-size: 0.88rem;
-            line-height: 1.4;
+            line-height: 1.5;
+            letter-spacing: 0.5px;
         }
 
-        /* МОБИЛЬНАЯ АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ */
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
         @media (max-width: 900px) {
-            body {
-                flex-direction: column;
-            }
+            body { flex-direction: column; }
             aside {
                 width: 100%;
                 height: auto;
                 position: relative;
                 flex-direction: row;
                 align-items: center;
-                padding: 12px 16px;
+                padding: 16px;
                 gap: 12px;
                 overflow-x: auto;
             }
-            .brand {
-                margin-bottom: 0;
-                font-size: 1rem;
-            }
-            .brand-icon {
-                width: 30px;
-                height: 30px;
-                font-size: 0.8rem;
-            }
-            .menu {
-                flex-direction: row;
-                gap: 6px;
-                overflow-x: auto;
-                padding-bottom: 4px;
-            }
-            .menu-btn {
-                padding: 8px 12px;
-                font-size: 0.82rem;
-                white-space: nowrap;
-                border-radius: 10px;
-            }
-            .system-status-card {
-                display: none;
-            }
-            main {
-                margin-left: 0;
-                max-width: 100%;
-                padding: 16px;
-            }
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                margin-bottom: 20px;
-            }
-            .badge-widget {
-                align-self: flex-end;
-                margin-top: -35px;
-            }
-            .card {
-                grid-column: span 12;
-                padding: 18px;
-            }
-            .timer-display {
-                font-size: 1.6rem;
-            }
+            .brand { margin-bottom: 0; font-size: 0.95rem; letter-spacing: 1px; }
+            .brand-icon { width: 28px; height: 28px; font-size: 0.75rem; }
+            .menu { flex-direction: row; gap: 6px; overflow-x: auto; }
+            .menu-btn { padding: 8px 12px; font-size: 0.75rem; white-space: nowrap; }
+            .system-status-card { display: none; }
+            main { margin-left: 0; max-width: 100%; padding: 20px; }
+            header { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
+            .badge-widget { align-self: flex-start; }
+            .card { grid-column: span 12; padding: 20px; }
+            .timer-display { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Навигация -->
+    <!-- Архивное меню -->
     <aside>
         <div class="brand">
-            <div class="brand-icon"><i class="fa-solid fa-code-branch"></i></div>
-            <span>KASHENKO // OS</span>
+            <div class="brand-icon">K</div>
+            <span>Archive</span>
         </div>
         <div class="menu">
-            <button class="menu-btn active" onclick="switchTab('work', this)"><i class="fa-solid fa-briefcase"></i> 1. Работа</button>
-            <button class="menu-btn" onclick="switchTab('routine', this)"><i class="fa-solid fa-moon"></i> 2. Рутина</button>
-            <button class="menu-btn" onclick="switchTab('content', this)"><i class="fa-solid fa-video"></i> 3. Контент</button>
-            <button class="menu-btn" onclick="switchTab('music', this)"><i class="fa-solid fa-guitar"></i> 4. Музыка</button>
-            <button class="menu-btn" onclick="switchTab('analytics', this)"><i class="fa-solid fa-chart-line"></i> 5. Охваты</button>
+            <button class="menu-btn active" onclick="switchTab('work', this)"><i class="fa-solid fa-briefcase"></i> 01. Работа</button>
+            <button class="menu-btn" onclick="switchTab('routine', this)"><i class="fa-solid fa-moon"></i> 02. Рутина</button>
+            <button class="menu-btn" onclick="switchTab('content', this)"><i class="fa-solid fa-video"></i> 03. Контент</button>
+            <button class="menu-btn" onclick="switchTab('music', this)"><i class="fa-solid fa-guitar"></i> 04. Музыка</button>
+            <button class="menu-btn" onclick="switchTab('analytics', this)"><i class="fa-solid fa-chart-line"></i> 05. Охваты</button>
         </div>
         <div class="system-status-card">
             <div class="status-indicator">
                 <div class="status-dot"></div>
-                <span id="systemModeText">Активен</span>
+                <span id="systemModeText">System Online</span>
             </div>
-            <span style="font-size: 0.7rem; color: var(--text-muted);" id="systemSubText">Синхронизировано</span>
+            <span style="font-size: 0.7rem; color: var(--text-muted);" id="systemSubText">Edition 2026 // Pro</span>
         </div>
     </aside>
 
@@ -436,19 +404,19 @@
         <!-- ПАПКА 1: РАБОТА -->
         <div id="work" class="section active">
             <div class="card">
-                <h3><i class="fa-solid fa-briefcase" style="color: var(--warning);"></i> Тайм-менеджмент дня</h3>
+                <h3><i class="fa-solid fa-briefcase"></i> Тайм-менеджмент дня</h3>
                 <div class="timer-box">
-                    <span style="font-size: 0.78rem; color: var(--text-muted);">До конца рабочего дня:</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">До конца рабочего дня:</span>
                     <div class="timer-display" id="workCountdown">00:00:00</div>
                 </div>
                 <input type="text" id="workTaskInput" placeholder="Задача (поиск блогеров, таблицы)...">
-                <button class="btn btn-orange" onclick="addWorkTask()"><i class="fa-solid fa-plus"></i> Добавить задачу</button>
+                <button class="btn" onclick="addWorkTask()"><i class="fa-solid fa-plus"></i> Добавить задачу</button>
             </div>
 
             <div class="card">
-                <h3><i class="fa-solid fa-clipboard-check" style="color: var(--success);"></i> Итоги дня и перенос</h3>
-                <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 12px;">Невыполненные задачи можно перенести на завтра.</p>
-                <button class="btn btn-danger" onclick="carryOverTasks()" style="margin-bottom: 12px;"><i class="fa-solid fa-share"></i> Перенести несделанное</button>
+                <h3><i class="fa-solid fa-clipboard-check"></i> Итоги дня и перенос</h3>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 16px; letter-spacing: 0.5px;">Невыполненные задачи можно перенести на следующий день.</p>
+                <button class="btn btn-outline" onclick="carryOverTasks()" style="margin-bottom: 16px;"><i class="fa-solid fa-share"></i> Перенести несделанное</button>
                 <ul id="workList" class="list"></ul>
             </div>
         </div>
@@ -456,20 +424,20 @@
         <!-- ПАПКА 2: ЛИЧНАЯ РУТИНА -->
         <div id="routine" class="section">
             <div class="card full">
-                <h3><i class="fa-solid fa-moon" style="color: var(--purple);"></i> Вечерний лайфстайл (После 18:00)</h3>
-                <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 12px;">Отдых, прогулки, TikTok и общение с девушкой.</p>
-                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    <span style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 6px 10px; border-radius: 8px; font-size: 0.78rem;"><i class="fa-solid fa-person-walking" style="color: #34d399;"></i> Прогулка</span>
-                    <span style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 6px 10px; border-radius: 8px; font-size: 0.78rem;"><i class="fa-solid fa-mobile-screen" style="color: #60a5fa;"></i> TikTok</span>
-                    <span style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 6px 10px; border-radius: 8px; font-size: 0.78rem;"><i class="fa-solid fa-heart" style="color: #f472b6;"></i> С девушкой</span>
+                <h3><i class="fa-solid fa-moon"></i> Вечерний лайфстайл (После 18:00)</h3>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 16px; letter-spacing: 0.5px;">Отдых, прогулки, TikTok и общение с девушкой.</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    <span style="background: #121212; border: 1px solid var(--border); padding: 8px 14px; border-radius: var(--radius); font-size: 0.8rem; letter-spacing: 0.5px;"><i class="fa-solid fa-person-walking" style="color: #fff;"></i> Прогулка</span>
+                    <span style="background: #121212; border: 1px solid var(--border); padding: 8px 14px; border-radius: var(--radius); font-size: 0.8rem; letter-spacing: 0.5px;"><i class="fa-solid fa-mobile-screen" style="color: #fff;"></i> TikTok</span>
+                    <span style="background: #121212; border: 1px solid var(--border); padding: 8px 14px; border-radius: var(--radius); font-size: 0.8rem; letter-spacing: 0.5px;"><i class="fa-solid fa-heart" style="color: #fff;"></i> С девушкой</span>
                 </div>
             </div>
 
             <div class="card full">
-                <h3><i class="fa-solid fa-list-check" style="color: var(--accent-blue);"></i> Личные вечерние задачи</h3>
-                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                <h3><i class="fa-solid fa-list-check"></i> Личные вечерние задачи</h3>
+                <div style="display: flex; gap: 10px; margin-bottom: 16px;">
                     <input type="text" id="taskInput" placeholder="Личное дело..." style="margin-bottom:0;">
-                    <button class="btn" style="width: auto; padding: 0 16px;" onclick="addTask()"><i class="fa-solid fa-plus"></i></button>
+                    <button class="btn" style="width: auto; padding: 0 24px;" onclick="addTask()"><i class="fa-solid fa-plus"></i></button>
                 </div>
                 <ul id="taskList" class="list"></ul>
             </div>
@@ -478,12 +446,12 @@
         <!-- ПАПКА 3: КОНТЕНТ -->
         <div id="content" class="section">
             <div class="card">
-                <h3><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-purple);"></i> Сценарист & Хуки</h3>
+                <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Сценарист & Хуки</h3>
                 <div class="idea-box" id="ideaOutput">Генератор готовых хуков для роликов.</div>
-                <button class="btn btn-purple" onclick="generateIdea()" style="margin-bottom: 12px;"><i class="fa-solid fa-brain"></i> Сгенерировать идею</button>
+                <button class="btn btn-outline" onclick="generateIdea()" style="margin-bottom: 16px;"><i class="fa-solid fa-brain"></i> Сгенерировать идею</button>
 
                 <div class="timer-box">
-                    <span style="font-size: 0.78rem; color: var(--text-muted);">До дедлайна постинга (21:00):</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">Дедлайн постинга (21:00):</span>
                     <div class="timer-display" id="countdownTimer">00:00:00</div>
                 </div>
 
@@ -498,7 +466,7 @@
             </div>
 
             <div class="card">
-                <h3><i class="fa-solid fa-clapperboard" style="color: var(--success);"></i> Трекер публикаций</h3>
+                <h3><i class="fa-solid fa-clapperboard"></i> Трекер публикаций</h3>
                 <ul id="contentList" class="list"></ul>
             </div>
         </div>
@@ -506,17 +474,17 @@
         <!-- ПАПКА 4: МУЗЫКА -->
         <div id="music" class="section">
             <div class="card">
-                <h3><i class="fa-solid fa-guitar" style="color: var(--accent-purple);"></i> Музыкальный трекер</h3>
-                <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 12px;">Цель: 2 раза в неделю.</p>
+                <h3><i class="fa-solid fa-guitar"></i> Музыкальный трекер</h3>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 16px; letter-spacing: 0.5px;">Цель: 2 сессии в неделю.</p>
                 
-                <div style="background: rgba(139, 92, 246, 0.04); border: 1px solid rgba(139, 92, 246, 0.2); padding: 12px; border-radius: 10px; margin-bottom: 12px;">
-                    <strong style="color: var(--accent-purple); font-size: 0.85rem;">📊 Статус недели:</strong>
-                    <div style="margin-top: 4px; font-size: 0.85rem;" id="musicTrackerStatus">Записей: 0 из 2</div>
+                <div style="background: #121212; border: 1px solid var(--border); padding: 16px; border-radius: var(--radius); margin-bottom: 16px;">
+                    <strong style="color: #fff; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;">Статус недели:</strong>
+                    <div style="margin-top: 6px; font-size: 0.9rem;" id="musicTrackerStatus">Записей: 0 из 2</div>
                 </div>
 
                 <input type="date" id="musicDate">
                 <input type="text" id="musicNote" placeholder="Что делал (бит, гитара)...">
-                <button class="btn btn-purple" onclick="addMusicSession()"><i class="fa-solid fa-plus"></i> Зафиксировать</button>
+                <button class="btn" onclick="addMusicSession()"><i class="fa-solid fa-plus"></i> Зафиксировать</button>
             </div>
 
             <div class="card">
@@ -528,27 +496,27 @@
         <!-- ПАПКА 5: АНАЛИТИКА -->
         <div id="analytics" class="section">
             <div class="card">
-                <h3><i class="fa-solid fa-chart-line" style="color: var(--success);"></i> Охваты по площадкам</h3>
+                <h3><i class="fa-solid fa-chart-line"></i> Охваты по площадкам</h3>
                 <input type="date" id="statDate">
                 <select id="statPlatform">
-                    <option value="TikTok">🎵 TikTok</option>
-                    <option value="Instagram Reels">📸 Instagram Reels</option>
-                    <option value="YouTube Shorts">▶️ YouTube Shorts</option>
+                    <option value="TikTok">TikTok</option>
+                    <option value="Instagram Reels">Instagram Reels</option>
+                    <option value="YouTube Shorts">YouTube Shorts</option>
                 </select>
                 <input type="number" id="statViews" placeholder="Просмотры / Охваты...">
-                <button class="btn btn-success" onclick="addStat()"><i class="fa-solid fa-floppy-disk"></i> Сохранить</button>
+                <button class="btn" onclick="addStat()"><i class="fa-solid fa-floppy-disk"></i> Сохранить</button>
             </div>
 
             <div class="card">
                 <h3><i class="fa-solid fa-chart-pie"></i> Детальная статистика</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
-                    <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 10px; border: 1px solid var(--border); text-align: center;">
-                        <span style="font-size: 0.7rem; color: var(--text-muted);">Записей</span>
-                        <div id="totalStatsCount" style="font-size: 1.2rem; font-weight: 800; color: var(--accent-blue); margin-top: 2px;">0</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                    <div style="background: #121212; padding: 14px; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
+                        <span style="font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">Записей</span>
+                        <div id="totalStatsCount" style="font-size: 1.3rem; font-weight: 700; color: #fff; margin-top: 4px;">0</div>
                     </div>
-                    <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 10px; border: 1px solid var(--border); text-align: center;">
-                        <span style="font-size: 0.7rem; color: var(--text-muted);">Суммарный охват</span>
-                        <div id="totalViewsSum" style="font-size: 1.2rem; font-weight: 800; color: var(--success); margin-top: 2px;">0</div>
+                    <div style="background: #121212; padding: 14px; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
+                        <span style="font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">Суммарный охват</span>
+                        <div id="totalViewsSum" style="font-size: 1.3rem; font-weight: 700; color: #fff; margin-top: 4px;">0</div>
                     </div>
                 </div>
                 <ul id="statsList" class="list"></ul>
@@ -637,7 +605,7 @@
             workTasks.forEach((w, i) => {
                 list.innerHTML += `
                     <li class="item ${w.completed ? 'done' : ''}">
-                        <span>💼 ${w.text}</span>
+                        <span>${w.text}</span>
                         <div class="item-actions">
                             <button class="action-btn chk" onclick="toggleWorkTask(${i})"><i class="fa-solid fa-check"></i></button>
                             <button class="action-btn del" onclick="deleteWorkTask(${i})"><i class="fa-solid fa-trash"></i></button>
@@ -714,7 +682,7 @@
                     <li class="item ${item.status === '🚀 Готово к выкладке' ? 'done' : ''}">
                         <div>
                             <strong>${item.title}</strong><br>
-                            <span style="font-size: 0.75rem; color: var(--accent-blue);">${item.status}</span>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">${item.status}</span>
                         </div>
                         <div class="item-actions">
                             <button class="action-btn del" onclick="deleteContent(${i})"><i class="fa-solid fa-trash"></i></button>
@@ -745,7 +713,7 @@
             musicSessions.forEach((m, i) => {
                 list.innerHTML += `
                     <li class="item">
-                        <div><strong style="color: var(--accent-purple);">📅 ${m.date}</strong> — ${m.note}</div>
+                        <div><strong style="color: #fff;">📅 ${m.date}</strong> — ${m.note}</div>
                         <button class="action-btn del" onclick="deleteMusic(${i})"><i class="fa-solid fa-trash"></i></button>
                     </li>
                 `;
@@ -779,7 +747,7 @@
                         <div>
                             <span>📅 ${s.date} [<b>${s.platform}</b>]</span>
                         </div>
-                        <strong style="color: var(--success);">👁️ ${Number(s.views).toLocaleString()}</strong>
+                        <strong style="color: #fff;">👁️ ${Number(s.views).toLocaleString()}</strong>
                         <button class="action-btn del" onclick="deleteStat(${i})"><i class="fa-solid fa-trash"></i></button>
                     </li>
                 `;
