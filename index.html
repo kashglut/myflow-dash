@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KASHENKO // OS — Ultimate Life Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #030508;
+            --surface: #0a0e17;
+            --surface-card: #111726;
+            --border: rgba(255, 255, 255, 0.07);
+            --border-glow: rgba(59, 130, 246, 0.35);
+            --text-main: #f8fafc;
+            --text-muted: #8b95a5;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 15% 10%, rgba(59, 130, 246, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.08) 0%, transparent 45%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* Боковая навигация */
+        aside {
+            width: 290px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 28px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
+            font-size: 1.1rem;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .menu-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 12px 16px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.25s ease;
+            text-align: left;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            transform: translateX(4px);
+        }
+
+        .menu-btn.active {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.35);
+        }
+
+        .system-status-card {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--success);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        /* Главный контейнер */
+        main {
+            margin-left: 290px;
+            flex: 1;
+            padding: 40px;
+            max-width: calc(100vw - 290px);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 36px;
+        }
+
+        .header-title h1 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            background: linear-gradient(135deg, #fff 30%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-title p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        .badge-widget {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 10px 18px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Секции */
+        .section {
+            display: none;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .section.active {
+            display: grid;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Карточки */
+        .card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            grid-column: span 6;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+            position: relative;
+        }
+
+        .card.full { grid-column: span 12; }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-main);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 14px 18px;
+            border-radius: 14px;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 700;
+            width: 100%;
+            transition: all 0.2s;
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn:hover { opacity: 0.92; transform: translateY(-1px); }
+        .btn-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35); }
+        .btn-success { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35); }
+        .btn-orange { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35); }
+        .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35); }
+
+        .timer-box {
+            background: rgba(245, 158, 11, 0.05);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            padding: 22px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .timer-display {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: var(--warning);
+            margin-top: 6px;
+            letter-spacing: 1px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        ul.list {
+            list-style: none;
+            max-height: 360px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        ul.list::-webkit-scrollbar { width: 5px; }
+        ul.list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+        li.item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 10px;
+            transition: background 0.2s;
+        }
+
+        li.item.done span, li.item.done strong { text-decoration: line-through; color: var(--text-muted); opacity: 0.6; }
+
+        .item-actions { display: flex; gap: 10px; align-items: center; }
+
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .action-btn.del:hover { color: var(--danger); }
+        .action-btn.chk:hover { color: var(--success); }
+
+        .idea-box {
+            background: rgba(139, 92, 246, 0.08);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            padding: 18px;
+            border-radius: 14px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #d8b4fe;
+            display: none;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+            aside { width: 100%; height: auto; position: relative; flex-direction: row; padding: 16px; align-items: center; }
+            .menu { display: none; }
+            .system-status-card { display: none; }
+            main { margin-left: 0; max-width: 100%; padding: 16px; }
+            .card { grid-column: span 12; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <aside>
+        <div>
+            <div class="brand">
+                <div class="brand-icon"><i class="fa-solid fa-bolt"></i></div>
+                <span>KASHENKO // OS</span>
+            </div>
+            <div class="menu">
+                <button class="menu-btn active" onclick="switchTab('work', this)"><i class="fa-solid fa-briefcase"></i> 1. Работа (до 16:00-18:00)</button>
+                <button class="menu-btn" onclick="switchTab('routine', this)"><i class="fa-solid fa-moon"></i> 2. Личная рутина (Вечер)</button>
+                <button class="menu-btn" onclick="switchTab('content', this)"><i class="fa-solid fa-video"></i> 3. Контент & Сценарии</button>
+                <button class="menu-btn" onclick="switchTab('music', this)"><i class="fa-solid fa-guitar"></i> 4. Музыка & Трекер</button>
+                <button class="menu-btn" onclick="switchTab('analytics', this)"><i class="fa-solid fa-chart-line"></i> 5. Аналитика охватов</button>
+            </div>
+        </div>
+        <div class="system-status-card">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span id="systemModeText">Рабочий режим</span>
+            </div>
+            <span style="font-size: 0.78rem; color: var(--text-muted);" id="systemSubText">Поиск блогеров, таблицы, задачи</span>
+        </div>
+    </aside>
+
+    <!-- Основной контент -->
+    <main>
+        <header>
+            <div class="header-title">
+                <h1 id="pageTitle">Работа (до 16:00-18:00)</h1>
+                <p id="pageSubtitle">Основной рабочий блок, таблицы и поиск блогеров</p>
+            </div>
+            <div class="badge-widget" id="liveClock">00:00:00</div>
+        </header>
+
+        <!-- ПАПКА 1: РАБОТА -->
+        <div id="work" class="section active">
+            <div class="card">
+                <h3><i class="fa-solid fa-briefcase" style="color: var(--warning);"></i> Тайм-менеджмент дня</h3>
+                <div class="timer-box">
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">До конца рабочего дня осталось:</span>
+                    <div class="timer-display" id="workCountdown">00:00:00</div>
+                </div>
+                <input type="text" id="workTaskInput" placeholder="Задача (например: Поиск блогеров, заполнить таблицу)...">
+                <button class="btn btn-orange" onclick="addWorkTask()"><i class="fa-solid fa-plus"></i> Добавить в рабочие задачи</button>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa-solid fa-clipboard-check" style="color: var(--success);"></i> Итоги дня и перенос задач</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 14px;">Отметь выполненное. Невыполненные задачи можно перенести на завтра.</p>
+                <button class="btn btn-danger" onclick="carryOverTasks()" style="margin-bottom: 14px;"><i class="fa-solid fa-share"></i> Перенести несделанное на завтра</button>
+                <ul id="workList" class="list"></ul>
+            </div>
+        </div>
+
+        <!-- ПАПКА 2: ЛИЧНАЯ РУТИНА (ВЕЧЕР) -->
+        <div id="routine" class="section">
+            <div class="card full">
+                <h3><i class="fa-solid fa-moon" style="color: var(--purple);"></i> Вечернее расслабление & Лайфстайл (После 18:00)</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px;">Время для отдыха, прогулок, TikTok и общения с девушкой.</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    <span style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 8px 14px; border-radius: 12px; font-size: 0.85rem;"><i class="fa-solid fa-person-walking" style="color: #34d399;"></i> Прогулка на свежем воздухе</span>
+                    <span style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 8px 14px; border-radius: 12px; font-size: 0.85rem;"><i class="fa-solid fa-mobile-screen" style="color: #60a5fa;"></i> Посмотреть TikTok</span>
+                    <span style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 8px 14px; border-radius: 12px; font-size: 0.85rem;"><i class="fa-solid fa-heart" style="color: #f472b6;"></i> Время для девушки</span>
+                </div>
+            </div>
+
+            <div class="card full">
+                <h3><i class="fa-solid fa-list-check" style="color: var(--accent-blue);"></i> Личные вечерние задачи</h3>
+                <div style="display: flex; gap: 10px; margin-bottom: 14px;">
+                    <input type="text" id="taskInput" placeholder="Личное дело на вечер..." style="margin-bottom:0;">
+                    <button class="btn" style="width: auto; padding: 0 20px;" onclick="addTask()"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <ul id="taskList" class="list"></ul>
+            </div>
+        </div>
+
+        <!-- ПАПКА 3: КОНТЕНТ И СЦЕНАРИИ -->
+        <div id="content" class="section">
+            <div class="card">
+                <h3><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-purple);"></i> Сценарист & Хуки</h3>
+                <div class="idea-box" id="ideaOutput">Генератор готовых хуков и тем для роликов.</div>
+                <button class="btn btn-purple" onclick="generateIdea()" style="margin-bottom: 14px;"><i class="fa-solid fa-brain"></i> Сгенерировать идею</button>
+
+                <div class="timer-box">
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">До дедлайна постинга (21:00):</span>
+                    <div class="timer-display" id="countdownTimer">00:00:00</div>
+                </div>
+
+                <input type="text" id="contentTitle" placeholder="Тема ролика...">
+                <select id="contentStatus">
+                    <option value="💡 Идея">💡 Идея</option>
+                    <option value="🎥 Нужно снять">🎥 Нужно снять</option>
+                    <option value="💻 Смонтировать">💻 Смонтировать</option>
+                    <option value="🚀 Готово к выкладке">🚀 Готово к выкладке</option>
+                </select>
+                <button class="btn" onclick="addContentItem()">Добавить в план</button>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa-solid fa-clapperboard" style="color: var(--success);"></i> Трекер публикаций (Снято / Сделано)</h3>
+                <ul id="contentList" class="list"></ul>
+            </div>
+        </div>
+
+        <!-- ПАПКА 4: МУЗЫКА И ТРЕКЕР -->
+        <div id="music" class="section">
+            <div class="card">
+                <h3><i class="fa-solid fa-guitar" style="color: var(--accent-purple);"></i> График музыкальных сессий</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">Цель: работать над треками строго **2 раза в неделю** (например, Вторник и Четверг).</p>
+                
+                <div style="background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.2); padding: 16px; border-radius: 14px; margin-bottom: 16px;">
+                    <strong style="color: var(--accent-purple);">📊 Трекер недели:</strong>
+                    <div style="margin-top: 8px; font-size: 0.95rem;" id="musicTrackerStatus">Записей на этой неделе: 0 из 2</div>
+                </div>
+
+                <input type="date" id="musicDate">
+                <input type="text" id="musicNote" placeholder="Что делал (бит, вокал, аранжировка)...">
+                <button class="btn btn-purple" onclick="addMusicSession()"><i class="fa-solid fa-plus"></i> Зафиксировать сессию</button>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa-solid fa-list"></i> История сессий</h3>
+                <ul id="musicList" class="list"></ul>
+            </div>
+        </div>
+
+        <!-- ПАПКА 5: ПОДРОБНАЯ АНАЛИТИКА ОХВАТОВ -->
+        <div id="analytics" class="section">
+            <div class="card">
+                <h3><i class="fa-solid fa-chart-line" style="color: var(--success);"></i> Внести охваты по площадкам</h3>
+                <input type="date" id="statDate">
+                <select id="statPlatform">
+                    <option value="TikTok">🎵 TikTok</option>
+                    <option value="Instagram Reels">📸 Instagram Reels</option>
+                    <option value="YouTube Shorts">▶️ YouTube Shorts</option>
+                </select>
+                <input type="number" id="statViews" placeholder="Просмотры / Охваты (число)...">
+                <button class="btn btn-success" onclick="addStat()"><i class="fa-solid fa-floppy-disk"></i> Сохранить статистику</button>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa-solid fa-chart-pie"></i> Подробная статистика</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                    <div style="background: rgba(0,0,0,0.3); padding: 16px; border-radius: 14px; border: 1px solid var(--border); text-align: center;">
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Всего записей</span>
+                        <div id="totalStatsCount" style="font-size: 1.5rem; font-weight: 800; color: var(--accent-blue); margin-top: 4px;">0</div>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.3); padding: 16px; border-radius: 14px; border: 1px solid var(--border); text-align: center;">
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Суммарный охват</span>
+                        <div id="totalViewsSum" style="font-size: 1.5rem; font-weight: 800; color: var(--success); margin-top: 4px;">0</div>
+                    </div>
+                </div>
+                <ul id="statsList" class="list"></ul>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Часы
+        setInterval(() => {
+            document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('ru-RU');
+        }, 1000);
+
+        // Переключение вкладок
+        function switchTab(sectionId, btn) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.menu-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            btn.classList.add('active');
+
+            const titles = {
+                'work': ['Работа (до 16:00-18:00)', 'Основной рабочий блок, таблицы и поиск блогеров'],
+                'routine': ['Личная рутина (Вечер)', 'Отдых, прогулки, TikTok и время для девушки'],
+                'content': ['Контент & Сценарии', 'Генератор хуков и трекер публикаций'],
+                'music': ['Музыка & Трекер', 'Контроль создания музыки (цель: 2 раза в неделю)'],
+                'analytics': ['Аналитика охватов', 'Подробная статистика по площадкам (TikTok, Insta, YouTube)']
+            };
+            document.getElementById('pageTitle').innerText = titles[sectionId][0];
+            document.getElementById('pageSubtitle').innerText = titles[sectionId][1];
+        }
+
+        // Таймеры
+        setInterval(() => {
+            const now = new Date();
+            const workTarget = new Date();
+            workTarget.setHours(18, 0, 0, 0);
+            const workDiff = workTarget - now;
+            const workTimerEl = document.getElementById('workCountdown');
+
+            if (workDiff > 0) {
+                const h = String(Math.floor((workDiff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+                const m = String(Math.floor((workDiff / 1000 / 60) % 60)).padStart(2, '0');
+                const s = String(Math.floor((workDiff / 1000) % 60)).padStart(2, '0');
+                if(workTimerEl) workTimerEl.innerText = `${h}:${m}:${s}`;
+            } else {
+                if(workTimerEl) workTimerEl.innerText = "РАБОЧИЙ ДЕНЬ ОКОНЧЕН";
+            }
+
+            const postTarget = new Date();
+            postTarget.setHours(21, 0, 0, 0);
+            if (now > postTarget) postTarget.setDate(postTarget.getDate() + 1);
+            const postDiff = postTarget - now;
+            const ph = String(Math.floor((postDiff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+            const pm = String(Math.floor((postDiff / 1000 / 60) % 60)).padStart(2, '0');
+            const ps = String(Math.floor((postDiff / 1000) % 60)).padStart(2, '0');
+            const timerEl = document.getElementById('countdownTimer');
+            if(timerEl) timerEl.innerText = `${ph}:${pm}:${ps}`;
+        }, 1000);
+
+        // Генератор идей
+        const contentScripts = [
+            "Хук: «Никому не говорите об этом трюке с поиском блогеров!»",
+            "Хук: «Как успевать работать до 18:00 и качать музыку без выгорания»",
+            "Хук: «Топ-3 инструмента, которые экономят часы при заполнении таблиц»"
+        ];
+        function generateIdea() {
+            const randomScript = contentScripts[Math.floor(Math.random() * contentScripts.length)];
+            const box = document.getElementById('ideaOutput');
+            box.style.display = 'block';
+            box.innerHTML = `💡 <b>Сценарий / Хук:</b><br>${randomScript}`;
+            document.getElementById('contentTitle').value = randomScript.replace('Хук: ', '').replace('«', '').replace('»', '');
+        }
+
+        // Данные
+        let workTasks = JSON.parse(localStorage.getItem('my_work_tasks')) || [
+            { text: 'Поиск блогеров в базу', completed: false },
+            { text: 'Заполнение рабочих таблиц', completed: false }
+        ];
+        let tasks = JSON.parse(localStorage.getItem('my_tasks')) || [
+            { text: 'Прогулка на свежем воздухе', completed: false },
+            { text: 'Время для девушки', completed: false }
+        ];
+        let contentItems = JSON.parse(localStorage.getItem('my_content')) || [];
+        let musicSessions = JSON.parse(localStorage.getItem('my_music')) || [];
+        let stats = JSON.parse(localStorage.getItem('my_stats')) || [];
+
+        // Работа
+        function renderWorkTasks() {
+            const list = document.getElementById('workList');
+            list.innerHTML = '';
+            workTasks.forEach((w, i) => {
+                list.innerHTML += `
+                    <li class="item ${w.completed ? 'done' : ''}">
+                        <span>💼 ${w.text}</span>
+                        <div class="item-actions">
+                            <button class="action-btn chk" onclick="toggleWorkTask(${i})"><i class="fa-solid fa-check"></i></button>
+                            <button class="action-btn del" onclick="deleteWorkTask(${i})"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </li>
+                `;
+            });
+            localStorage.setItem('my_work_tasks', JSON.stringify(workTasks));
+        }
+
+        function addWorkTask() {
+            const input = document.getElementById('workTaskInput');
+            if(!input.value.trim()) return;
+            workTasks.unshift({ text: input.value, completed: false });
+            input.value = '';
+            renderWorkTasks();
+        }
+
+        function toggleWorkTask(i) {
+            workTasks[i].completed = !workTasks[i].completed;
+            renderWorkTasks();
+        }
+
+        function deleteWorkTask(i) {
+            workTasks.splice(i, 1);
+            renderWorkTasks();
+        }
+
+        function carryOverTasks() {
+            // Удаляем выполненные, оставляем невыполненные на завтра
+            workTasks = workTasks.filter(w => !w.completed);
+            renderWorkTasks();
+            alert("Выполненные задачи очищены. Несделанные остались в плане на завтра!");
+        }
+
+        // Рутина
+        function renderTasks() {
+            const list = document.getElementById('taskList');
+            list.innerHTML = '';
+            tasks.forEach((t, i) => {
+                list.innerHTML += `
+                    <li class="item ${t.completed ? 'done' : ''}">
+                        <span>${t.text}</span>
+                        <div class="item-actions">
+                            <button class="action-btn chk" onclick="toggleTask(${i})"><i class="fa-solid fa-check"></i></button>
+                            <button class="action-btn del" onclick="deleteTask(${i})"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </li>
+                `;
+            });
+            localStorage.setItem('my_tasks', JSON.stringify(tasks));
+        }
+
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            if(!input.value.trim()) return;
+            tasks.unshift({ text: input.value, completed: false });
+            input.value = '';
+            renderTasks();
+        }
+
+        function toggleTask(i) {
+            tasks[i].completed = !tasks[i].completed;
+            renderTasks();
+        }
+
+        function deleteTask(i) {
+            tasks.splice(i, 1);
+            renderTasks();
+        }
+
+        // Контент
+        function renderContent() {
+            const list = document.getElementById('contentList');
+            list.innerHTML = '';
+            contentItems.forEach((item, i) => {
+                list.innerHTML += `
+                    <li class="item ${item.status === '🚀 Готово к выкладке' ? 'done' : ''}">
+                        <div>
+                            <strong>${item.title}</strong><br>
+                            <span style="font-size: 0.8rem; color: var(--accent-blue);">${item.status}</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn del" onclick="deleteContent(${i})"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </li>
+                `;
+            });
+            localStorage.setItem('my_content', JSON.stringify(contentItems));
+        }
+
+        function addContentItem() {
+            const title = document.getElementById('contentTitle').value;
+            const status = document.getElementById('contentStatus').value;
+            if(!title.trim()) return;
+            contentItems.unshift({ title, status });
+            document.getElementById('contentTitle').value = '';
+            renderContent();
+        }
+
+        function deleteContent(i) {
+            contentItems.splice(i, 1);
+            renderContent();
+        }
+
+        // Музыка и трекер цели 2 р/нед
+        function renderMusic() {
+            const list = document.getElementById('musicList');
+            list.innerHTML = '';
+            musicSessions.forEach((m, i) => {
+                list.innerHTML += `
+                    <li class="item">
+                        <div><strong style="color: var(--accent-purple);">📅 ${m.date}</strong> — ${m.note}</div>
+                        <button class="action-btn del" onclick="deleteMusic(${i})"><i class="fa-solid fa-trash"></i></button>
+                    </li>
+                `;
+            });
+            document.getElementById('musicTrackerStatus').innerText = `Записей зафиксировано: ${musicSessions.length} (Цель: 2 в неделю)`;
+            localStorage.setItem('my_music', JSON.stringify(musicSessions));
+        }
+
+        function addMusicSession() {
+            const date = document.getElementById('musicDate').value;
+            const note = document.getElementById('musicNote').value;
+            if(!date || !note.trim()) return;
+            musicSessions.unshift({ date, note });
+            document.getElementById('musicNote').value = '';
+            renderMusic();
+        }
+
+        function deleteMusic(i) {
+            musicSessions.splice(i, 1);
+            renderMusic();
+        }
+
+        // Подробная аналитика
+        function renderStats() {
+            const list = document.getElementById('statsList');
+            list.innerHTML = '';
+            let totalSum = 0;
+            stats.forEach((s, i) => {
+                totalSum += Number(s.views);
+                list.innerHTML += `
+                    <li class="item">
+                        <div>
+                            <span>📅 ${s.date} [<b>${s.platform}</b>]</span>
+                        </div>
+                        <strong style="color: var(--success);">👁️ ${Number(s.views).toLocaleString()} охват</strong>
+                        <button class="action-btn del" onclick="deleteStat(${i})"><i class="fa-solid fa-trash"></i></button>
+                    </li>
+                `;
+            });
+            document.getElementById('totalStatsCount').innerText = stats.length;
+            document.getElementById('totalViewsSum').innerText = totalSum.toLocaleString();
+            localStorage.setItem('my_stats', JSON.stringify(stats));
+        }
+
+        function addStat() {
+            const date = document.getElementById('statDate').value;
+            const platform = document.getElementById('statPlatform').value;
+            const views = document.getElementById('statViews').value;
+            if(!date || !views) return;
+            stats.push({ date, platform, views });
+            renderStats();
+        }
+
+        function deleteStat(i) {
+            stats.splice(i, 1);
+            renderStats();
+        }
+
+        renderWorkTasks();
+        renderTasks();
+        renderContent();
+        renderMusic();
+        renderStats();
+    </script>
+</body>
+</html>
+
+</html>
